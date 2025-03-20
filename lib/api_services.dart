@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class ApiService {
   final String baseUrl = "http://10.0.2.2:5000";
 
-  Future<List<dynamic>> moderateText(String text) async {
+  Future<Map<String, dynamic>> moderateText(String text) async {
     final url = Uri.parse("$baseUrl/moderate-text");
 
     final response = await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode({"text": text}));

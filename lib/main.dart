@@ -14,6 +14,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +26,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => TextModerationScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ParagraphSpeechDetectionScreen()));
               },
-              child: Text("Analyze Text"),
+              child: Text("Analyze Paragraph"),
             ),
             ElevatedButton(
               onPressed: () {

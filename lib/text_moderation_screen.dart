@@ -1,19 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'api_services.dart';
 
-class TextModerationScreen extends StatefulWidget {
-  const TextModerationScreen({super.key});
+class ParagraphSpeechDetectionScreen extends StatefulWidget {
+  const ParagraphSpeechDetectionScreen({super.key});
 
   @override
-  _TextModerationScreenState createState() => _TextModerationScreenState();
+  _ParagraphSpeechDetectionScreenState createState() => _ParagraphSpeechDetectionScreenState();
 }
 
-class _TextModerationScreenState extends State<TextModerationScreen> {
+class _ParagraphSpeechDetectionScreenState extends State<ParagraphSpeechDetectionScreen> {
   final TextEditingController _controller = TextEditingController();
   final ApiService _apiService = ApiService();
-  String _result = "Enter text to analyze";
+  String _result = "Enter a paragraph to analyze";
 
   void _analyzeText() async {
     String text = _controller.text.trim();
@@ -22,7 +20,7 @@ class _TextModerationScreenState extends State<TextModerationScreen> {
     try {
       final response = await _apiService.moderateText(text);
       setState(() {
-        _result = response.toString();
+        _result = response.toString(); // Display the result
       });
     } catch (e) {
       setState(() {
@@ -34,16 +32,20 @@ class _TextModerationScreenState extends State<TextModerationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Text Moderation")),
+      appBar: AppBar(title: Text("Paragraph Speech Detection")),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(controller: _controller, decoration: InputDecoration(labelText: "Enter text")),
+            TextField(
+              controller: _controller,
+              maxLines: null, // Allow multiple lines for paragraph input
+              decoration: InputDecoration(labelText: "Enter paragraph"),
+            ),
             SizedBox(height: 10),
             ElevatedButton(onPressed: _analyzeText, child: Text("Analyze")),
             SizedBox(height: 20),
-            Text("Result: $_result"),
+            Text("Result: $_result"), // Display result here
           ],
         ),
       ),
