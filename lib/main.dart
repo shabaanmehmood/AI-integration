@@ -1,42 +1,23 @@
+import 'package:chatbot/constants.dart';
+import 'package:chatbot/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'text_moderation_screen.dart';
-import 'image_moderation_screen.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 
 void main() {
-  runApp(MyApp());
+  Gemini.init(apiKey: GEMINI_API_KEY);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomeScreen());
-  }
-}
+  const MyApp({super.key});
 
-class HomeScreen extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Hate Speech Detector")),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => TextModerationScreen()));
-              },
-              child: Text("Analyze Text"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ImageModerationScreen()));
-              },
-              child: Text("Analyze Image"),
-            ),
-          ],
-        ),
-      ),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
+      home: HomePage(),
     );
   }
 }
